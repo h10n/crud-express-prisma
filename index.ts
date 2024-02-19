@@ -7,6 +7,9 @@
 import app from "./app";
 import http from "http";
 import debug from "debug";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 /**
  * Normalize a port into a number, string, or false.
@@ -70,7 +73,7 @@ const log = debug("express-service:server");
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.APP_PORT || "3000");
 app.set("port", port);
 
 /**
