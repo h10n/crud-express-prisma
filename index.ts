@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from "./app";
+import app from "@/app";
 import http from "http";
 import debug from "debug";
 import dotenv from "dotenv";

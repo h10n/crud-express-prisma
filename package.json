@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "rimraf dist && npx tsc",
+    "build": "rimraf dist && npx tsc && npx tsc-alias",
     "start": "node dist/index.js",
     "dev": "tsx watch --clear-screen=false ./index.ts"
   },
@@ -25,11 +25,12 @@
     "prisma": "^5.9.1",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.8",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   },
   "prisma": {
-    "schema": "database/schema.prisma",
-    "seed": "ts-node database/seed.ts"
+    "schema": "src/database/schema.prisma",
+    "seed": "ts-node src/database/seed.ts"
   }
 }
