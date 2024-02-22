@@ -1,2 +1,4 @@
 - orm? (prisma storng, sequelize many examples)
 - api docs (swagger)
+- api versioning
+- trace (ex: telescope)
