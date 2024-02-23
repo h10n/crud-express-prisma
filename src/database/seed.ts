@@ -40,7 +40,10 @@ const main = async () => {
   ];
 
   if (!table) {
-    seeders.forEach((seeder) => seeder.func());
+    for (let i = 0; i < seeders.length; i++) {
+      const seeder = seeders[i];
+      await seeder.func();
+    }
   }
 
   if (table) {

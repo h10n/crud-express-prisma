@@ -12,7 +12,8 @@ export const roleSeeder = async (prisma: PrismaClient) => {
     },
   ];
 
-  data.forEach(async (role) => {
+  for (let i = 0; i < data.length; i++) {
+    const role = data[i];
     const roles = await prisma.role.upsert({
       where: { name: role.name },
       update: {
@@ -24,5 +25,5 @@ export const roleSeeder = async (prisma: PrismaClient) => {
       },
     });
     console.log({ roles });
-  });
+  }
 };

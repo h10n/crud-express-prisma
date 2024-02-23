@@ -8,12 +8,15 @@
     "dev": "tsx watch --clear-screen=false ./index.ts"
   },
   "dependencies": {
+    "@lucia-auth/adapter-prisma": "^4.0.0",
     "@prisma/client": "^5.9.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
-    "morgan": "~1.9.1"
+    "lucia": "^3.0.1",
+    "morgan": "~1.9.1",
+    "oslo": "^1.1.2"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.6",
@@ -31,6 +34,6 @@
   },
   "prisma": {
     "schema": "src/database/schema.prisma",
-    "seed": "ts-node src/database/seed.ts"
+    "seed": "tsx src/database/seed.ts"
   }
 }

@@ -25,7 +25,8 @@ export const profileSeeder = async (prisma: PrismaClient) => {
     },
   ];
 
-  data.forEach(async (profile) => {
+  for (let i = 0; i < data.length; i++) {
+    const profile = data[i];
     const profiles = await prisma.profile.upsert({
       where: { id: profile.id },
       update: {
@@ -45,5 +46,5 @@ export const profileSeeder = async (prisma: PrismaClient) => {
       },
     });
     console.log({ profiles });
-  });
+  }
 };

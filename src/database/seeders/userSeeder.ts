@@ -1,22 +1,24 @@
 import { PrismaClient } from "@prisma/client";
+import { Argon2id } from "oslo/password";
 
 export const userSeeder = async (prisma: PrismaClient) => {
   const data = [
     {
       id: 1,
       email: "admin@kimhakim.my.id",
-      password: "admin123",
+      password: await new Argon2id().hash("admin123"),
       roleId: 1,
     },
     {
       id: 2,
       email: "hakim@kimhakim.my.id",
-      password: "admin123",
+      password: await new Argon2id().hash("admin123"),
       roleId: 2,
     },
   ];
 
-  data.forEach(async (user) => {
+  for (let i = 0; i < data.length; i++) {
+    const user = data[i];
     const users = await prisma.user.upsert({
       where: { id: user.id },
       update: {
@@ -32,5 +34,5 @@ export const userSeeder = async (prisma: PrismaClient) => {
       },
     });
     console.log({ users });
-  });
+  }
 };
