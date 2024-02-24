@@ -7,12 +7,7 @@ export const authRouter = express.Router();
 
 authRouter.post("/login", async (req, res) => {
   const email: string | null = req.body.email ?? null;
-  if (
-    !email ||
-    email.length < 3 ||
-    email.length > 31 ||
-    !/^[a-z0-9_-]+$/.test(email)
-  ) {
+  if (!email || email.length < 3 || email.length > 31) {
     return res.status(400).json({
       email_value: email ?? "",
       error: "Invalid password",
@@ -50,8 +45,9 @@ authRouter.post("/login", async (req, res) => {
     });
   }
 
+  //! Todo: one session per user
   //! Todo: check if user id must be string
-  const session = await lucia.createSession(`${existingUser.id}`, {});
+  const session = await lucia.createSession(existingUser.id, {});
   res
     .appendHeader(
       "Set-Cookie",
