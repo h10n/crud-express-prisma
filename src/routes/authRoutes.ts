@@ -25,6 +25,25 @@ authRouter.post("/login", async (req, res) => {
     where: {
       email: email,
     },
+    select: {
+      id: true,
+      email: true,
+      password: true,
+      profile: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          avatarUrl: true,
+        },
+      },
+      role: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
   });
 
   if (!existingUser) {
@@ -38,6 +57,7 @@ authRouter.post("/login", async (req, res) => {
     existingUser.password,
     password
   );
+
   if (!validPassword) {
     return res.status(400).json({
       email_value: email,
@@ -45,7 +65,10 @@ authRouter.post("/login", async (req, res) => {
     });
   }
 
-  //! Todo: one session per user
+  const { password: removedPassword, ...user } = existingUser;
+
+  // one session per user
+  await lucia.invalidateUserSessions(existingUser.id);
   //! Todo: check if user id must be string
   const session = await lucia.createSession(existingUser.id, {});
   res
@@ -53,6 +76,30 @@ authRouter.post("/login", async (req, res) => {
       "Set-Cookie",
       lucia.createSessionCookie(session.id).serialize()
     )
-    .appendHeader("Location", "/")
-    .redirect("/");
+    .status(200)
+    .json({
+      info: "login Success",
+      token: session.id,
+      user,
+    });
+});
+
+authRouter.post("/logout", async (_, res) => {
+  if (!res.locals.session) {
+    return res
+      .status(401)
+      .json({
+        error: "No Session found",
+      })
+      .end();
+  }
+
+  await lucia.invalidateUserSessions(res.locals.session.userId);
+
+  return res
+    .setHeader("Set-Cookie", lucia.createBlankSessionCookie().serialize())
+    .status(200)
+    .json({
+      info: "Logout Success",
+    });
 });

@@ -3,7 +3,7 @@ import { Lucia } from "lucia";
 import { PrismaAdapter } from "@lucia-auth/adapter-prisma";
 
 interface DatabaseUser {
-  id: number;
+  id: string;
   email: string;
   password: string;
 }
