@@ -1,0 +1,11 @@
+- orm? (prisma strong, sequelize many examples) (Resolved)
+- api docs (swagger)
+- api versioning
+- implement RBAC
+- trace (ex: telescope)
+- linter
+- error handling/ & logging
+- language/localization
+- unit tests
+- refactoring & cleanup
+- remove unused packages

@@ -1,4 +1,3 @@
-import { lucia } from "@/config/lucia";
 import { NextFunction, Request, Response } from "express";
 
 export const authRoleMiddleware = async (
@@ -6,6 +5,7 @@ export const authRoleMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
+  // !Todo: implement RBAC
   if (!res.locals.user) {
     return res
       .status(403)
