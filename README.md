@@ -1,3 +1,5 @@
-Simple CRUD + AUTH REST API BUILD USING EXPRESS & TYPESCRIPT
+Simple CRUD + Auth Service Using Express & Prisma
 
-STATE: WIP
+Typescript
+
+State: WIP
